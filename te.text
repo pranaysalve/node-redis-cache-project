@@ -1,0 +1,34 @@
+Required Update to Global Jest setup.js
+In the upcoming lecture we will be creating a global Jest setup file. We will need to make a few changes to support a slightly newer version of Mongoose.
+
+In tests/setup.js, find the mongoose.connect method and remove the useMongoClient option. Replace this with the useNewUrlParser and useUnifiedTopology options both set to true:
+
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+
+Next, add an afterAll hook to make sure we disconnect from our database:
+
+afterAll(async () => {
+  await mongoose.disconnect();
+});
+
+
+The entire updated setup.js code can be found below:
+
+require('../models/User');
+ 
+const mongoose = require('mongoose');
+const keys = require('../config/keys');
+ 
+mongoose.Promise = global.Promise;
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+ 
+afterAll(async () => {
+  await mongoose.disconnect();
+});

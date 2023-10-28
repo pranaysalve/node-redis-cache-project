@@ -1,9 +1,11 @@
-const mongoose = require("mongoose");
-const keys = require("../config/keys");
+jest.setTimeout(60000);
+
 require("../models/User");
 
-mongoose.Promise = global.Promise;
+const mongoose = require("mongoose");
+const keys = require("../config/keys");
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {
   dbName: "blogpost",
   useNewUrlParser: true,

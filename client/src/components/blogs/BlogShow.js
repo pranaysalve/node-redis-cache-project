@@ -11,6 +11,7 @@ class BlogShow extends Component {
     if (this.props.blog.imageUrl) {
       return (
         <img
+          alt={this.props.blog.imageUrl}
           src={`https://blogpostbucket-123.s3.ap-south-1.amazonaws.com/${this.props.blog.imageUrl}`}
           width={250}
           height={250}
